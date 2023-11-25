@@ -1,0 +1,389 @@
+DevOps Training Programme 
+25th Nov. 2023 
+
+Weekends - 9:30AM - 1:30PM IST Hrs. 4hrs/Day 
+
+10 Days.
+
+
+#######################
+Day - 1 25th Nov. 2023 
+#######################
+
+		- DevOps Introduction :::
+		
+			DevOps ::: 
+			
+		SDLC ::: Software Development Life Cycle 
+		
+		Software :
+		
+			Application Software 
+				
+					Desktop Applications
+					
+					Web Applications
+					
+					Mobile Applications
+			
+			System Software
+		
+			
+		SDLC ::: Software Development Life Cycle 
+		
+		Phases of SDLC ::
+	
+			Requirement Analysis
+			Design 
+			Coding/Development 
+			Testing 
+			Implementation
+			Maintainence/Monitoring
+			
+		Desktop Applications --> Billing System for a SuperMarket
+		
+		Traditional SDLC - Waterfall Model 
+								--> Linear in approach - Top-Down Approach
+							
+		Funcions/Modules ::
+			
+			Design User Interface
+			Stock mainainence 
+			Billing 
+			Payment 
+			User Mgmt.
+			Online payment feature *** New
+		
+		
+		Phases of SDLC ::
+	
+		COre Project :
+			Requirement Analysis	==> 9 Months to complete the projects 
+			Design 
+			Coding/Development 			4th month
+			Testing 
+			Implementation
+			Maintainence/Monitoring		
+		
+		Enhancement 
+		
+			Requirement Analysis	
+			Design 
+			Coding/Development 		
+			Testing 
+			Implementation
+			Maintainence/Monitoring	
+			
+			
+	
+		AGILE Methodology :::
+		
+		Functions/Modules ::
+			
+			Design User Interface
+			Stock mainainence 
+			Billing 
+			Payment 
+			User Mgmt.
+			Online payment feature *** New
+			
+		Iteration1 : Design User Interface
+
+			Requirement Analysis	
+			Design 
+			Coding/Development 		
+			Testing 
+			Implementation
+			Maintainence/Monitoring	
+
+		Iteration2 : Stock mainainence
+
+			Requirement Analysis	
+			Design 
+			Coding/Development 		
+			Testing 
+			Implementation
+			Maintainence/Monitoring	
+
+		Iteration3 : Coding/Development 	
+
+			Requirement Analysis	
+			Design 
+			Coding/Development 		
+			Testing 
+			Implementation
+			Maintainence/Monitoring	
+
+		Iteration-nth : Online payment feature *** New 	
+
+			Requirement Analysis	
+			Design 
+			Coding/Development 		
+			Testing 
+			Implementation
+			Maintainence/Monitoring	
+			
+		
+		Agile Methodology ::
+		
+			Using Agile, we can achieve :::
+			
+				Continuous Development
+				Continuous Integration 
+				Continuous Testing 
+				Continuous Delivery :
+					- This expects manual approval for production release.
+				
+			We cannot achieve :	
+				Continuous Deployment ;
+					- This doesnt required any manual approval for production release.			
+				
+				
+		DevOps ::::
+		
+			DevOps is Software Development Strategy, which promote collaboration between the teams like Development Team and Operations Team to achieve Continuous Development, Continuous Integration, Continuous Testing, Continuous Delivery, Continuous Deployment and Continuous Monitoring in more automated fashion.
+			
+		Now ; How to Implement DevOps ????
+			
+			
+		Application Architecture :::
+		
+			- Monolith Application Architecture
+					- It is tightly coupled Application Architecture
+					- We cannot split the modules for independent coding and deployment
+			
+			- Micro-Service Based Application Architecture 
+					- Loosely coupled application 
+					- The whole application can be splitted into various micro-services.
+					- Which can be independently developed, tested and deployed to prod.
+					
+					
+			www.amazon.com - E_Commerce Portal
+			
+			Sign_up			- Micro-Service1 ==> 3-Tier Application Architecture - 
+													developer1 - Independently code,test,released to Production Envi. without any manual invertions
+													Front-End Layer 
+													Application Layer
+													Back-End Layer(DataBase)
+			Sign-In 		- Micro-Service2
+			Search 
+			Add to cart 
+			place order 
+			make payment 
+			confirm order 
+			track
+				
+			
+		DevOps Stages :::
+		
+				Continuous Development :
+					
+						- It is the capability of the DEV Team to continuously involve in coding 
+						- Increase the Developers Productivity.
+						
+						Developer1 - Role ??
+						
+							Coding --> Java web Application
+							*.java 
+							Build 	--> Process of compiling the source code and creating artifacts (Binaries - *.war/*.jar/*.dll/*.exec)
+							Unit Test 
+							Promote the code for further testing 
+							Notify the testing team 
+							
+					DevOps Approach ::
+							
+							Source Development --> Create the code and update the code in a source code repository.
+						
+						Automated thru DevOps Approach :
+						
+							Pick the code, 
+							Perform Automated Build 
+							Perform Automated Unit Testing 
+							Promote the code for further testing
+							Notify the testing team 
+							
+					Tools ::
+					
+						IDE - Eclipse based IDEs, Visual Studio, Visual Studio Code, Pycharm
+						Maven/Gradle
+						GIT 
+						Jenkins 
+						
+						
+				Continuous Integration :::
+				
+						- It is the capability of DEV Team to continuously integrate the changes for further testing.
+						
+					Tools ::
+						
+						- Jenkins,Ansible,Docker,Kubernetes
+
+				Continuous Testing :::
+				
+						- Automate the Testing :
+						
+					Tools ::
+					
+						- Jenkins,JUnit,TestNG,Selenium 
+						
+						
+				Continuous Delivery / Deployment :::
+				
+						- Both Continuous Delivery & Deployment are used to release the product to production environment
+								
+								Continuous Delivery :
+										- This expects manual approval for production release.
+
+										Banking :
+											
+													Production Deployment Window : - (4Hrs. - 6Hrs.) 
+															Release the changes to production environment
+																Prod. Testing ==> If it goes wrong 
+																		Fix the issue in give time 
+																		Revert the Changes.
+																
+
+								Continuous Deployment ;
+										- This does not required any manual approval for production release. It allows a fully automated builds and production deployment.
+										- Without Downtime.
+										- Increase the freqency of production releases
+
+										Facebook 
+										Netflix
+										google
+										amazon
+										
+									Shift Left Approach									
+				
+					Tools ::
+					
+						- Jenkins,Ansible,Docker,Kubernetes
+						
+						
+				Continuous Monitoring :::
+				
+						-> Monitor the Infra-Structure :::
+						
+								CPU Utilization/Memory/Traffic 
+								
+					Tools ::	
+							Jenkins,Prometheus/Grafana/Splunk/DataDog/Dynatrace 
+						
+						-> Application Monitoring :::
+						
+							AppDynamics
+				
+				
+				Infra-Structure Management :::
+				
+					Create/Provision of Infra-Structure --> Jenkins,Terraform/Cloudformation/ARM/Vagrant
+
+					Configuration of Infra-Structure    --> Jenkins,Ansible/Chef/Puppet
+		
+	
+		Roles and Responsilities of DevOps Team/Member ::
+		
+			Teams :::
+					DevOps Team 
+						Infra-Structure Management Team 
+						Application Development Team 
+						Testing Team
+						Release Management Team
+						Production Support Team
+						Production Monitoring Team 
+						Security Team 
+				
+				
+		DevOps Associate 
+		DevOps Engineers 
+		DevOps Lead 
+		DevOps Architect 
+		DevOps Consultant 
+		
+		All together :::
+		
+			DevOps :: 	People 
+						Strategy/Process 
+						Tools 
+						
+			Assessment :::
+			
+			
+		DevOps LifeCycle :::
+		
+			Src_Code --> Commit the code to Repos --> Build --> Create Artifacts --> Deploy to Test Envi. --> Automated Testing --> Deploy to Production 
+																																			
+																																			|
+																																			|
+																																			|
+																																			
+																																	Monitor Production Envi.
+						<---------------------------------------------------------------------------------------------------------------------
+			
+			
+		Continuous Development :::
+		
+				---> Source Code Management System 
+				---> Build Tools 
+				---> Jenkins 
+				
+			Lab Environment : 
+					AWS Cloud Platform :
+					
+						- Create AWS Free Tier Account.
+						
+				Cloud Platform :::
+				
+				Virtual Machines :::
+				
+				Cloud Computing :::
+				
+					Computing Device ::: 
+				
+				
+				On-Premises Environment 
+						- Own Data Center / Servers 
+						
+							Dev Server 
+							Test Server 
+							Prod Server 
+				
+				Cloud Service Providers 
+				
+					AWS 
+						IAAS/PAAS/SAAS
+						
+					Azure 
+					GCP 
+					
+			DevOps Tools :::
+			
+				Open Source DevOps Tools ::
+				
+					- GIT/GITHUB/Jenkins/Docker/Kubernetes/Ansible/Terraform/Prometheus/Grafana
+					
+					
+				Managed Services ::
+				
+					Provided by the service Providers ::
+					
+						AWS 	- Code pipeline/Code Commit/ Code Build / Code Deploy/ Code Test 
+						Azure	- Azure DevOps Services 
+						GCP		-  
+				
+
+		Set Up Lab Environment :::
+		
+		
+			1. Create Github Account https://github.com/
+					
+			2. Create AWS Free Tier Account 
+			3. Create AWS EC2 Instances(Virtual Machine)
+			4. Connect to AWS Instances :
+					- EC2 Instance Connect 
+					- SSH Agent
+							MobaXTerm 
+							Putty 
+					- Terminal
+			5. Create DockerHub Account
+			

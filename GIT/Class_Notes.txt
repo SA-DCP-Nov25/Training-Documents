@@ -394,7 +394,7 @@ Day - 1 25th Nov. 2023
 NExt : GIT Module :::
 
 #######################
-Day - 1 25th Nov. 2023 
+Day - 2 26th Nov. 2023 
 #######################	
 
 
@@ -858,3 +858,320 @@ Day - 1 25th Nov. 2023
   654  git log --oneline
   655  clear
   656  history
+
+
+#######################
+Day - 3 2nd Dec. 2023 
+#######################
+
+
+			Git Fundamentals :::
+			
+			git commit ==> 
+			
+				create a commit point with a unique commit id. 
+					versioning/tracking 
+					Commit Message ==> 
+						payment.java 
+						git commit -m "CR-1223 Updated Payment.java file" 
+						
+						Project/Release-ID 
+						CR-Number - Change Request Number
+					
+					
+			HEAD Pointer ==> It always points to the latest commit of current branch.
+			
+			git diff ==> used to get the differences 
+			
+			
+		Undo actions :
+			
+			- Unstage 
+				
+					git rm --cached q1.txt			# Will just remove the changes from staging area .
+														But, the changes are retained in working directory.
+					
+					git rm -f q1.txt 				# Will remove the changes from staging area & Working Directory.
+			
+			
+			- revert/reset the commits :::
+			
+			Both reset / revert are used to undo the changes from local repository.
+			
+			
+			git reset :::
+			
+				Syntax : git reset <reset_option> <Commit_id>
+				
+				- Used to undo the changes 
+				- transfer the HEAD pointer to a specific commit point. 
+				- The git reset is NOT recommended in the shared repository.
+				- Git Reset will NOT Create any new commit point. It will completely modify the commit history.
+				- So, we cannot track the changes.
+				
+					- git reset --soft 
+								- It is used to undo the commit.
+								- The commited changes will be back to staging area. And the change will also be there in working directory. 
+								- The HEAD Pointer will move back to the specific commit point.
+								- It is considered as the safest undo. - There is no loss of data.
+								
+					
+					- git reset --mixed 								# Default
+								- It is used to undo the commit.
+								- The commited changes will be back to working directory. 
+								- The HEAD Pointer will move back to the specific commit point.
+								- There is no loss of data.					
+					
+					- git reset --hard
+								- It is used to undo the commit.
+								- The commited changes will be permantly removed from local repo., staging area, as well as from working directory. 
+								- The HEAD Pointer will move back to the specific commit point.
+								- There is loss of data.				
+			
+			
+			
+				Repo ==> Extract ==> Process/Trasform ===> load to DBase   ==> every 1 hr.
+				
+				Monitoring 
+				
+					time series database ==> 
+					
+					
+			git revert ::::
+			
+				Syntax : git revert <Commit_id>
+				
+				- Used to undo the changes 
+				- transfer the HEAD pointer to a specific commit point. 
+				- The git revert can be recommended in the shared repository.
+				- Git Revert will Create any new commit point.
+				- So, we can track the changes.
+				
+				git revert 															=   		git reset --hard 
+				(Will keep track of the changes, by creating new commit point)					(we cannot track the changes)
+				
+		
+
+		GIT IGNORE ::::
+		
+			Use to ignore the files from tracking in git repository.
+			create .gitignore file and maintain the list of files/file pattern to be ignored from tracking.
+			
+			Project Folder 
+			
+			Workspace ==> Java web application :			--> commit 			push 			---> remote repo.
+			
+				signin.java				database 
+				payment.java				
+				*.html
+				*.css
+				*.class 
+				*.war 
+				target/
+					*.jar
+				application.properties 
+				db_credentials
+				db_secrets
+
+
+		GIT COMMIT :::
+		
+				program ==> 5 funcs.. 1func --> create commit,  2func
+				commit message --> it shd be related to the the func./task
+				git commit --amend -m "CR1001 - Created q1.txt"
+				
+		
+		GIT Branch === meant for Parallel Development.
+		
+			Repo --> master branch  # Default branch 
+			Logical Partitioning of Repository used to perform parallel development without impacting others.
+		
+			TO maintain the integrity of Master Branch.
+			Always the master / default branch is considered as a production version.
+			
+			
+		- GIT Branch Strategies :::
+		
+		
+		Scenario 1:
+			
+				Project1_Repo 
+				
+					master 
+						cm1,2,3,4,5
+						
+		Scenario 2:
+			
+				Project1_Repo 
+				
+					master  -- cm1,cm2 
+					
+						feature_Branch -- cm1,cm2, fcm1,fcm2
+					
+		Scenario 3:
+			
+				Project1_Repo 
+				
+					master  -- cm1,cm2 
+					
+						Dev_Branch  -- cm1,cm2 
+							feature_Branch1 -- cm1,cm2, f1cm1,f1cm2		
+							feature_Branch2 -- cm1,cm2, f2cm1,f2cm2
+
+		Scenario 4:
+			
+				Project1_Repo 
+				
+					master  -- cm1,cm2 
+					
+						Integration_Branch  -- cm1,cm2
+							Developer1_Branch  -- cm1,cm2 
+								feature_Branch1 -- cm1,cm2, f1cm1,f1cm2		
+								feature_Branch2 -- cm1,cm2, f2cm1,f2cm2							
+
+							Developer2_Branch  -- cm1,cm2 
+								feature_Branch1 -- cm1,cm2, f1cm1,f1cm2		
+								feature_Branch2 -- cm1,cm2, f2cm1,f2cm2	
+
+		Scenario 5:
+			
+				Project1_Repo 
+				
+					master  -- cm1,cm2,cm3
+					
+						Release_Branch -- cm1,cm2,Team1_Changes,Team2_Changes
+							Integration_Branch1  -- cm1,cm2,Dev1_Changes,Dev2_Changes								Team1
+								Developer1_Branch  -- cm1,cm2,f1cm1,f1cm2,f2cm1,f2cm2  
+									feature_Branch1 -- cm1,cm2, f1cm1,f1cm2		
+									feature_Branch2 -- cm1,cm2, f2cm1,f2cm2	
+									feature_Branch3 -- cm1,cm2, f2cm1,f2cm2										
+
+								Developer2_Branch  -- cm1,cm2,f1cm1,f1cm2,f2cm1,f2cm2  
+									feature_Branch1 -- cm1,cm2, f1cm1,f1cm2		
+									feature_Branch2 -- cm1,cm2, f2cm1,f2cm2	
+
+							Integration_Branch2  -- cm1,cm2,Dev1_Changes,Dev2_Changes								Team2
+								Developer1_Branch  -- cm1,cm2,f1cm1,f1cm2,f2cm1,f2cm2  
+									feature_Branch1 -- cm1,cm2, f1cm1,f1cm2		
+									feature_Branch2 -- cm1,cm2, f2cm1,f2cm2							
+
+								Developer2_Branch  -- cm1,cm2,f1cm1,f1cm2,f2cm1,f2cm2 
+									feature_Branch1 -- cm1,cm2, f1cm1,f1cm2		
+									feature_Branch2 -- cm1,cm2, f2cm1,f2cm2	
+									
+									
+		
+			Create Branch ::
+			
+				git branch 
+				
+				git branch feature1
+				git checkout -b feature2 
+				git switch -c feature3
+				
+				Merge ::
+				
+					git merge <source_Branch_name>
+					
+					git merge feature1 					## Should be executed from the Target Branch.
+					
+					
+					
+					git init					(master)
+					
+					echo "Hello" >> f1.txt 
+					
+					git add .
+					
+					git commit -m "cm1"
+					
+					
+					git switch -c feature1 
+					
+					git log --oneline 
+					
+					echo "Hello" >> q1.txt 
+					
+					git add .
+					
+					git commit -m "f1cm1"
+					
+					git switch master 
+					
+					git merge feature1 
+					
+					
+					master -- file1.txt 
+					
+					f1 & f2 --> when more than one user/feature try to update the same file it will create a conflict in target branch.
+					
+					Merge Conflict:
+					
+						Whenever we try to update a file from more than one feature branch/user merge conflict occurs. 
+						
+					How Resolve Merge Conflict :::
+					
+						1. Identify the file causing the merge conflict 
+						2. Review the content of the file in the target branch 
+						3. Decide which changes has to be retained/removed from that file.
+						4. Remove the header and footer and update the file. 
+						5. Add the changes and commit the changes in target branch.
+						
+					Prevent Merge Conflict.
+					
+					
+					Repository Management ::
+					
+					
+						Source_Code Repo ==> Project Component, DevOps Scripts - Jenkinsfile,Dockerfile,K8s file
+						
+						
+						
+						DevOps Admin_Repos 
+								DevOps Scripts - Jenkinsfile,Dockerfile,K8s file
+								
+					
+					Prevent Conflicts in Target Branch ::
+					
+					
+					git rebase :::
+					
+						It is used to Re-Base the commits into the current Branch.
+						It help to keep the current branch in sync with target branch.
+						It is used within the local repository between the branches
+						Maintain the linear commit history.
+						
+					git pull ::: between local and remote repository.
+					
+					Repo1: 
+						master -- 	cm1,cm2,cm3 
+						
+									cm1,cm2,cm3,f1cm1,f1cm2,f1cm3								# Upon merge from feature1 
+									
+									cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3 			# Upon merge from feature2
+									
+						
+							feature1 --> cm1,cm2,cm3
+							
+										 cm1,cm2,cm3,f1cm1,f1cm2,f1cm3
+										
+											git switch master 
+											
+											git merge feature1 
+											
+							feature2 --> cm1,cm2,cm3
+							
+										 cm1,cm2,cm3,f2cm1,f2cm2,f2cm3
+										 
+											git rebase master 
+											
+										 cm1,cm2,cm3,f1cm1,f1cm2,f1cm3,f2cm1,f2cm2,f2cm3
+										
+											git switch master 
+											
+											git merge feature2
+											
+											
+Next :: 
+				rebase,sqash,stash
+				jenkins

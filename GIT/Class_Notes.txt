@@ -1171,6 +1171,402 @@ Day - 3 2nd Dec. 2023
 											
 											git merge feature2
 											
+  501  cd e:
+  502  ls
+  503  cd SA-DCP-Nov25/
+  504  clear
+  505  ls
+  506  clear
+  507  ls
+  508  mkdir testrepo1
+  509  cd testrepo1/
+  510  clear
+  511  git init
+  512  git status
+  513  ls
+  514  echo "rec1" >> file1.txt
+  515  git add .
+  516  git commit -m "created file1.txt"
+  517  git log
+  518  echo "rec1" >> file2.txt
+  519  git add .
+  520  git commit -m "created file2.txt"
+  521  echo "rec1" >> file3.txt
+  522  git add .
+  523  git commit -m "created file3.txt"
+  524  clear
+  525  git log --oneline
+  526  git show 8d3bcd0
+  527  echo "asdfasdfsafsdf" > file3.txt
+  528  git add .
+  529  git commit -m "Updated file3.txt"
+  530  git log --oneline
+  531  git show ae096f8
+  532  cat file3.txt
+  533  vi file3.txt
+  534  git add .
+  535  git commit -m "Updated file3.txt"
+  536  git log --oneline
+  537  git show 175e617
+  538  clear
+  539  cat file3.txt
+  540  echo "rec2" >> file3.txt
+  541  echo "rec3" >> file3.txt
+  542  echo "rec4" >> file3.txt
+  543  cat file3.txt
+  544  git status
+  545  git diff
+  546  clear
+  547  git add .
+  548  git commit -m "adfasd"
+  549  clear
+  550  git status
+  551  echo "rec1" >> q1.txt
+  552  echo "rec2" >> q1.txt
+  553  clear
+  554  git add .
+  555  git status
+  556  git rm --cached q1.txt
+  557  git status
+  558  ls
+  559  git add .
+  560  git rm -f q1.txt
+  561  ls
+  562  git status
+  563  git log --oneline
+  564  clear
+  565  cd ..
+  566  mkdir testrepo2
+  567  cd testrepo2/
+  568  clear
+  569  git init
+  570  echo "rec1" > f1.txt
+  571  git add .
+  572  git commit -m "CM1"
+  573  echo "rec1" > f2.txt
+  574  git add .
+  575  git commit -m "CM2"
+  576  echo "rec1" > f3.txt
+  577  git add .
+  578  git commit -m "CM3"
+  579  echo "rec1" > f4.txt
+  580  git add .
+  581  git commit -m "CM4"
+  582  echo "rec1" > f5.txt
+  583  git add .
+  584  git commit -m "CM5"
+  585  clear
+  586  git log --oneline
+  587  ls
+  588  git ls-files
+  589  git status
+  590  git reset --soft 3cfc624
+  591  git status
+  592  ls
+  593  git ls-files
+  594  git log --oneline
+  595  git status
+  596  git commit -m "CM1.5"
+  597  git status
+  598  git log --oneline
+  599  ls
+  600  git ls-files
+  601  git reset --mixed 3cfc624
+  602  git status
+  603  ls
+  604  git ls-files
+  605  git log
+  606  git log --oneline
+  607  git add .
+  608  git commit -m "CM5.2"
+  609  clear
+  610  git status
+  611  git log --oneline
+  612  ls
+  613  git ls-files
+  614  git reset --hard 3cfc624
+  615  git log --oneline
+  616  git ls-files
+  617  ls
+  618  git status
+  619  git reset --hard 3c4efdc
+  620  git log --oneline
+  621  ls
+  622  git ls-files
+  623  git status
+  624  git log --oneline
+  625  clear
+  626  ls
+  627  git log --oneline
+  628  echo "rec1" >> f2.txt
+  629  git add .
+  630  git commit -m "CM2"
+  631  echo "rec1" >> f3.txt
+  632  git add .
+  633  git commit -m "CM3"
+  634  echo "rec1" >> f4.txt
+  635  git add .
+  636  git commit -m "CM4"
+  637  echo "rec1" >> f5.txt
+  638  git add .
+  639  echo "rec1" >> f5.txt
+  640  git add .
+  641  git commit -m "CM5"
+  642  clear
+  643  git log --oneline
+  644  git status
+  645  ls
+  646  git ls-files
+  647  git revert ddce726
+  648  git log -oneline
+  649  git log --oneline
+  650  git show 0d19045
+  651  ls
+  652  git ls-files
+  653  git status
+  654  git log --oneline
+  655  git revert 0d19045
+  656  git log --oneline
+  657  ls
+  658  git ls-files
+  659  git statusl
+  660  git status
+  661  clear
+  662  git log --oneline
+  663  git reset --hard 3c4efdc
+  664  git log --oneline
+  665  ls
+  666  git status
+  667  clear
+  668  ckear
+  669  clear
+  670  cd ..
+  671  mkdir testrepo3
+  672  cd testrepo3/
+  673  clear
+  674  git init
+  675  ls
+  676  ls -a
+  677  vi .gitignore
+  678  git add .
+  679  git commit -m "Initial Commit - Created .gitignore file"
+  680  clear
+  681  ls
+  682  ls -a
+  683  git status
+  684  git log --oneline
+  685  clear
+  686  cat .gitignore
+  687  git log --oneline
+  688  ls
+  689  echo "rec1" >> s1.java
+  690  echo "rec1" >> sample1.txt
+  691  echo "rec1" >> sample2.txt
+  692  echo "rec1" >> sample4.md
+  693  clear
+  694  ls
+  695  git status
+  696  cat .gitignore
+  697  echo "rec1" >> sample.txt
+  698  git status
+  699  ls
+  700  git add .
+  701  git commit -m "Created few files"
+  702  clear
+  703  git ls-files
+  704  git status
+  705  echo "rec1" >> q1.txt
+  706  git add .
+  707  git commit -m "asasdfasdfasweef"
+  708  git log --oneline
+  709  git commit -m "CR1001 - Created q1.txt"
+  710  git commit --amend -m "CR1001 - Created q1.txt"
+  711  git log --oneline
+  712  clear
+  713  git branch
+  714  ls
+  715  git branch feature1
+  716  git branch
+  717  git switch -c feature2
+  718  git branch
+  719  git switch master
+  720  git branch
+  721  git checkout -b feature
+  722  clear
+  723  mkdir
+  724  cd ..
+  725  clear
+  726  mkdir testrepo4
+  727  cd testrepo4
+  728  clear
+  729  git init
+  730  echo "rec1" >> f1.txt
+  731  git add .
+  732  git commit -m "cm1"
+  733  echo "rec1" >> f2.txt
+  734  git add .
+  735  git commit -m "cm2"
+  736  clear
+  737  git log --oneline
+  738  git branch
+  739  git switch -c feature1
+  740  git log --oneline
+  741  ls
+  742  cat f1.txt
+  743  clear
+  744  git log --oneline
+  745  ls
+  746  echo "rec1" >> s1.txt
+  747  git add .
+  748  git commit -m "f1cm1"
+  749  git log --oneline
+  750  ls
+  751  git switch master
+  752  git log --oneline
+  753  ls
+  754  git merge feature1
+  755  clear
+  756  ls
+  757  git log --oneline
+  758  clear
+  759  ls
+  760  clear
+  761  cd ..
+  762  mkdir testrepo5
+  763  cd testrepo5/
+  764  git init
+  765  clear
+  766  echo "rec1" >> f1.txt
+  767  git add .
+  768  git commit -m "cm1"
+  769  echo "rec1" >> f2.txt
+  770  git add .
+  771  git commit -m "cm2"
+  772  clear
+  773  git log --oneline
+  774  git branch
+  775  git branch feature1
+  776  git branch feature2
+  777  git branch
+  778  ls
+  779  clear
+  780  git switch feature1
+  781  git log -oneline
+  782  git log --oneline
+  783  echo "rec1" >> q1.txt
+  784  git add .
+  785  git commit -m "f1cm1"
+  786  clear
+  787  git log --oneline
+  788  git switch feature2
+  789  ls
+  790  git log --oneline
+  791  echo "rec1" >> e1.txt
+  792  git add .
+  793  git commit -m "f2cm1"
+  794  clear
+  795  ls
+  796  git status
+  797  git log --oneline
+  798  git switch master
+  799  git merge feature1
+  800  clear
+  801  ls
+  802  git log --oneline
+  803  git switch asdfasdfsdf
+  804  clear
+  805  git log --oneline
+  806  git merge feature2
+  807  ls
+  808  clear
+  809  git log --oneline
+  810  clear
+  811  cd ..
+  812  mkdir testrepo6
+  813  clear
+  814  cd testrepo6
+  815  git init
+  816  echo "rec1" >> f1.txt
+  817  git add .
+  818  git commit -m "cm1"
+  819  clear
+  820  ls
+  821  git branch feature1
+  822  git branch feature2
+  823  git log --oneline
+  824  git switch feature1
+  825  ls
+  826  cat
+  827  cat f1.txt
+  828  clear
+  829  git log --oneline
+  830  cat f1.txt
+  831  echo "record2 from feature1" >> f1.txt
+  832  cat f1.txt
+  833  git add .
+  834  git commit -m "f1cm1"
+  835  git log --oneline
+  836  git switch master
+  837  cat f1.txt
+  838  git merge feature1
+  839  cat f1.txt
+  840  git log --oneline
+  841  git switch feature2
+  842  cat f1.txt
+  843  git log --oneline
+  844  echo "record2 from feature2" >> f1.txt
+  845  git add .
+  846  git commit -m "f2cm1"
+  847  git log --oneline
+  848  git status
+  849  cat f1.txt
+  850  git switch master
+  851  cat f1.txt
+  852  git merge feature2
+  853  git status
+  854  clear
+  855  git status
+  856  cat f1.txt
+  857  vi f1.txt
+  858  git status
+  859  git add .
+  860  git commit -m "resolved Merge Conflict"
+  861  cat f1.txt
+  862  git log --oneline
+  863  clear
+  864  clear
+  865  ls
+  866  git status
+  867  git log
+  868  clear
+  869  git log --oneline
+  870  git branch feature3
+  871  git branch feature4
+  872  clear
+  873  git switch feature3
+  874  git log --oneline
+  875  ls
+  876  git switch feature4
+  877  ls
+  878  git log --oneline
+  879  echo "rec1" >> q1.txt
+  880  git add .
+  881  git commit -m "created q1.txt"
+  882  git rebase master
+  883  git switch master
+  884  git merge feature4
+  885  clear
+  886  git log --oneline
+  887  git switch feature3
+  888  git log --oneline
+  889  echo "aasdfasd" >> l1.txt
+  890  git add .
+  891  git commit -m "created l1.txt"
+  892  git log --oneline
+  893  git rebase master
+  894  git log --oneline
+  895  ls
+  896  history
 											
 Next :: 
 				rebase,sqash,stash

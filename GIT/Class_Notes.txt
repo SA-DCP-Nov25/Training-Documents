@@ -1755,9 +1755,7 @@ Day - 4 3rd Dec. 2023
 				Create GITHUB Access Token
 							- used to push and access the remote repos from local machine 
 							
-							
-							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
-			
+						
 			New Project :::
 			
 				In local machine we create project repo from scratch.

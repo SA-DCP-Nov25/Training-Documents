@@ -1571,3 +1571,378 @@ Day - 3 2nd Dec. 2023
 Next :: 
 				rebase,sqash,stash
 				jenkins
+#######################
+Day - 4 3rd Dec. 2023 
+#######################
+
+
+			Git Merge Options ::
+			
+				rebase 
+				
+				squash 
+				
+			GIT Stash 
+			
+			GIT Remote Repositories.
+			
+			
+			Jenkins 
+			
+			
+			
+			GIT SQUASH ::::
+			
+				-- > Can be used to combine the commits into single commit point during merge into target branch.
+				
+				
+				Repo :
+				
+					master --> cm1
+					
+							--->	cm1,f1cm1,2,3,4,5,6,7,8,9,............,100		# upon Merge from feature1
+							
+							--->    cm1,"combined all the changes from feature1"    # Upon Merge from feature1 using -- squash option.
+					
+						feature1 --> cm1,f1cm1,2,3,4,5,6,7,8,9,............,100 ==> ready 
+						
+						
+							git switch master 
+							
+							git merge feature1 
+							
+							git merge --squash feature1 
+							
+								--> git commit -m "combined all the changes from feature1"
+							
+							
+		Scenario 5:
+			
+				Project1_Repo 
+				
+					master  -- cm1,cm2,REL1.3
+					
+						Release_Branch -- cm1,cm2,Team1_Changes,Team2_Changes
+						#Release_Branch -- cm1,cm2,f1cm1,f1cm2,f2cm1,f2cm2,f1cm1,f1cm2,f2cm1,f2cm2,,f1cm1,f1cm2,f2cm1,f2cm2,f1cm1,f1cm2,f2cm1,f2cm2						
+						
+							Integration_Branch1  -- cm1,cm2,Dev1_Changes,Dev2_Changes								Team1
+							#Integration_Branch  -- cm1,cm2,f1cm1,f1cm2,f2cm1,f2cm2,f1cm1,f1cm2,f2cm1,f2cm2  				Team1
+								Developer1_Branch  -- cm1,cm2,f1cm1,f1cm2,f2cm1,f2cm2  
+									feature_Branch1 -- cm1,cm2, f1cm1,f1cm2		
+									feature_Branch2 -- cm1,cm2, f2cm1,f2cm2	
+									feature_Branch3 -- cm1,cm2, f2cm1,f2cm2										
+
+								Developer2_Branch  -- cm1,cm2,f1cm1,f1cm2,f2cm1,f2cm2  
+									feature_Branch1 -- cm1,cm2, f1cm1,f1cm2		
+									feature_Branch2 -- cm1,cm2, f2cm1,f2cm2	
+
+							Integration_Branch2  -- cm1,cm2,Dev1_Changes,Dev2_Changes								Team2
+							#Integration_Branch2  -- cm1,cm2,f1cm1,f1cm2,f2cm1,f2cm2,f1cm1,f1cm2,f2cm1,f2cm2  				Team2
+
+								Developer1_Branch  -- cm1,cm2,f1cm1,f1cm2,f2cm1,f2cm2  
+									feature_Branch1 -- cm1,cm2, f1cm1,f1cm2		
+									feature_Branch2 -- cm1,cm2, f2cm1,f2cm2							
+
+								Developer2_Branch  -- cm1,cm2,f1cm1,f1cm2,f2cm1,f2cm2 
+									feature_Branch1 -- cm1,cm2, f1cm1,f1cm2		
+									feature_Branch2 -- cm1,cm2, f2cm1,f2cm2	
+												
+												
+		GIT Stash :::
+		
+			--> Is used to save the uncommitted changes to a temporary location.
+			
+			Repo.: 
+			
+				master -- cm1 
+				
+					feature1 -->>> 
+									created the changes 
+									
+									adding to staging area 
+				
+				
+				git stash save "message" 		# To save the uncommitted changes to temporary area.
+				git stash list 					# get the list of stashed entires 
+				
+				git stash apply  					# will get the latest/specific stashed entry back to staging area.
+				git stash apply stash@{3}			This apply option will not delete the stashed entry 
+				
+				git stash pop						# will get the latest/specific stashed entry back to staging area.
+				git stash pop stash@{2}				This apply option will delete the stashed entry
+													
+				git stash drop 					# used to drop/delete a specific entry/latest stashed entry from the stash list  
+				git stash drop stash@{2}
+				
+				
+				git stash clear 				# used to drop/delete all the entires from the stash list
+				
+				git stash branch temp-feature3	# Used to create a new branch and update the stashed entry there.
+				
+				
+				
+		Remote Repository handling :::
+		
+		
+			Developers' work load :::
+
+				
+				
+			Existing Project :::
+				
+					Bug fixing / Enhancement Project
+				
+				
+				git clone 		==>	Used to clone/copy the entire remote repo to local machine.
+				
+				git add			==> Used to add the changes from working dir. to staging area.
+				
+				git commit		==> Used to commit the changes from staging area to local repository.
+				
+				git push 		==> Used to push the changes from local repository to remote repository.
+				
+				git fetch/pull :
+						Both are used to handle incremental changes from the remote repository.
+						
+						git fetch :
+							Is just used to check for incremental changes in remote repository. If there are any incremental changes available in remote repository, it will update the details in local repository but NOT in Working Directory.
+							
+						git pull :
+							Is used to check for incremental changes in remote repository. If there are any incremental changes available in remote repository, it will update the changes in local repository as well as in Working Directory.
+							
+							git pull = git fetch + git merge 
+							
+							
+				fork 			==> Used to copy the entire remote repo to another remote repository.
+				
+				
+				Create a New Project from scratch :::
+					
+				git init 		==> Used to Initialize a git repository in local machine. 
+									It will Initialize a git repository, create GIT_DIR! & default branch(master)
+									
+				
+				git remote  -v 			# used to list the remote repositories linked to the current local repository.
+				
+				git remote add origin https://github.com/SA-DCP-Nov25/TestRepo1.git
+				
+				git remote remove origin 
+				
+					
+				git branch -M main			# rename branch
+						
+						
+						
+				1. Create remote repo. - work with github. GUI 
+				
+				
+				Pull Request :::		It will be created by the developers 
+										And submitted to the approver 
+										
+				
+				
+				github - Microsoft .  Open Source Projects
+				azure-repos   == > Managed Services 
+				aws code commit 
+				bitbucket 
+				gitlab 
+				
+				
+				https://github.com/SA-DCP-Nov25/TestRepo1.git
+				
+				git clone https://github.com/SA-DCP-Nov25/TestRepo1.git
+				
+				Create GITHUB Access Token
+							- used to push and access the remote repos from local machine 
+							
+							
+							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
+			
+			New Project :::
+			
+				In local machine we create project repo from scratch.
+				
+				push the new repo to remote repo.
+				
+
+Summary ::
+			git workflow 
+			
+			git misc command 
+			
+			git branch
+			
+			merge / handling merge conflicts 
+			
+			handling the remote repos.
+			
+	  501  cd e:
+  502  cd SA-DCP-Nov25/
+  503  ls
+  504  clear
+  505  mkdir demorepo1
+  506  cd demorepo1/
+  507  clear
+  508  git init
+  509  echo "rec1" >> f1.txt
+  510  git add .
+  511  git commit -m "cm1"
+  512  clear
+  513  git log --oneline
+  514  git switch -c feature1
+  515  git log --oneline
+  516  echo "rec1" >> f2.txt
+  517  git add .
+  518  git commit -m "f1cm1"
+  519  echo "rec1" >> f3.txt
+  520  git add .
+  521  git commit -m "f1cm2"
+  522  echo "rec1" >> f4.txt
+  523  git add .
+  524  git commit -m "f1cm3"
+  525  echo "rec1" >> f5.txt
+  526  git add .
+  527  git commit -m "f1cm4"
+  528  echo "rec1" >> f6.txt
+  529  git add .
+  530  git commit -m "f1cm5"
+  531  clear
+  532  git log --oneline
+  533  ls
+  534  git switch master
+  535  git log --oneline
+  536  git merge --squash feature1
+  537  git status
+  538  git commit -m "feature1_Changes"
+  539  git log --oneline
+  540  ls
+  541  clear
+  542  git status
+  543  git branch
+  544  git branch feature3
+  545  git branch feature4
+  546  clear
+  547  git switch feature3
+  548  clear
+  549  git log --oneline
+  550  echo "rec1" >> l1.txt
+  551  echo "rec1" >> l1.txt
+  552  echo "rec1" >> l1.txt
+  553  echo "rec1" >> l1.txt
+  554  git status
+  555  git switch feature4
+  556  git log --oneline
+  557  git status
+  558  git switch feature3
+  559  git status
+  560  git add .
+  561  git stash save "created l1.txt"
+  562  git status
+  563  git stash list
+  564  echo "rec11" >> k1.txt
+  565  git add .
+  566  git stash save "created k1.txt"
+  567  git stash list
+  568  git status
+  569  git switch feature4
+  570  git status
+  571  git switch feature3
+  572  git stash list
+  573  git stash apply
+  574  git status
+  575  git stash list
+  576  git stash save "asdf"
+  577  git stash list
+  578  git stash pop
+  579  git stash list
+  580  git status
+  581  git commit -m "created k1.txt"
+  582  git stash drop stash@{0}
+  583  git stash list
+  584  echo "asdfas" >> asdf
+  585  echo "asdfas" >> asdfasdf
+  586  git add .
+  587  git stash save "files created"
+  588  git stash list
+  589  git stash clear
+  590  git stash list
+  591  clear
+  592  git status
+  593  ls
+  594  echo "rec1" >> o1.txt
+  595  echo "rec1" >> o1.txt
+  596  echo "rec1" >> o1.txt
+  597  echo "rec1" >> o1.txt
+  598  git add .
+  599  git stash save "created o1.txt"
+  600  git status
+  601  git stash branch temp-feature3
+  602  ls
+  603  git status
+  604  git stash list
+  605  ls
+  606  clear
+  607  cd ..
+  608  mkdir demorepos
+  609  cd demorepos/
+  610  clear
+  611  ls
+  612  git status
+  613  clear
+  614  git clone https://github.com/SA-DCP-Nov25/TestRepo1.git
+  615  ls
+  616  cd TestRepo1/
+  617  ls
+  618  ls -a
+  619  clear
+  620  git status
+  621  git remote -v
+  622  ls
+  623  git switch -c localfeature1
+  624  echo "rec1" >> localfile1.txt
+  625  echo "rec1" >> localfile1.txt
+  626  echo "rec1" >> localfile1.txt
+  627  echo "rec1" >> localfile1.txt
+  628  echo "rec1" >> localfile1.txt
+  629  git add .
+  630  git commit -m "created localfile1.txt"
+  631  git status
+  632  git push -u origin localfeature1
+  633  clear
+  634  git switch main
+  635  git status
+  636  ls
+  637  git fetch
+  638  ls
+  639  git log --oneline
+  640  git status
+  641  git pull
+  642  ls
+  643  clear
+  644  ls
+  645  git status
+  646  git pull
+  647  ls
+  648  clear
+  649  cd ..
+  650  mkdir TestRepo2
+  651  cd TestRepo2
+  652  clear
+  653  git init
+  654  echo "rec1" >> f1.txt
+  655  git add .
+  656  git commit -m "Initial Commit"
+  657  git status
+  658  ls
+  659  git log --oneline
+  660  git remote -v
+  661  git remote add origin https://github.com/SA-DCP-Nov25/Testrepo2.git
+  662  git remote -v
+  663  git branch -M main
+  664  git branch -M master
+  665  git push -u origin master
+  666  git status
+  667  git remote -v
+  668  git remote remove origin
+  669  git remote -v
+  670  history

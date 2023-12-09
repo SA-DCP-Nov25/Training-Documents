@@ -1492,3 +1492,370 @@ Default Directory :: /var/lib/jenkins
 										Build Executer --> Used to execute the jobs in the Node.
 															1 - only one job 
 															2 - run 2 jobs in parallel.
+
+
+
+#######################
+Day - 5 9th Dec. 2023 
+#######################
+
+
+		User Management 
+		Security Management
+		Jenkins Project Creation
+		Jenkins Master/Slave Configurations 
+		Create CICD Pipeline to build a Java Web Application
+			
+
+		Jenkins Project Creation :::
+		
+			Jenkins Projects/Jobs
+
+					- Free-style Projects :
+							It is based upon the manual configuration.
+							
+							Job1 ==> Job2
+						
+					- Pipeline Projects :
+							It is based on the Scripts - groovy scripts.
+							
+			Variables :::
+			
+				- Environment Variables 				
+					
+							echo "jenkins-${JOB_NAME}-${BUILD_NUMBER}"
+
+				- User Defined Variables
+			
+							echo "User defined variable - ${envi}"
+							
+
+						
+					- Pipeline Projects :
+							It is based on the Scripts - groovy scripts.
+							It is composed of various stages.
+							
+					DevOps Approach ::
+							
+							Source Development --> Create the code and update the code in a source code repository.
+						
+						Automated thru DevOps Approach :
+						
+							Pick the code, 
+							Perform Automated Build 
+							Perform Automated Unit Testing 
+							
+							Promote the code for further testing
+							Notify the testing team 
+							
+						Stage1 :
+								Pick the code from Source_Code Repo 
+						Stage2 : 
+								Automate Build 
+						Stage3 : 
+								Automate Unit Testing 
+								
+							Pipeline ::
+							
+								- Scripted Pipelines 
+								
+								- Declarative Pipelines 
+								
+
+pipeline {
+    agent { label 'slave1' }
+
+    stages {
+        stage('SCM Checkout') {
+            steps {
+                echo 'Perform SCM Checkout'
+				git 'https://github.com/LoksaiETA/Java-mvn-app2.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Perform Maven Build'
+				sh "mvn -Dmaven.test.failure.ignore=true clean package"
+            }
+        }
+        stage('Deploy to QA') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+}
+
+https://github.com/LoksaiETA/Java-mvn-app2.git
+								
+			Jenkins Master/Slave Configurations :::
+			
+				- Master - Slave Architecture :::
+
+			Jenkins_Server - Master (VM)	==> Used to Create Jenkins Jobs/Project & Schedule the Jobs to SlaveNodes.
+									Tools: git,jdk,jenkins
+			
+				Jenkins_Slave_Node1	(VM)	==> Used to perform actual build - Java Applications Build 
+									Tools: git, jdk, maven
+									Create User in Jenkins_Slave Node 
+									Create SSH Keys
+				
+			Jave Web Application :::
+			
+				Maven Tool :
+				
+					- Is a Build Tool
+					- Used to compile,create the aritfacts.
+					
+					How Maven Works :
+					
+						- POM.xml :
+							It is used to define the dependencies and the plugins required to perform application build and testing.
+						
+						- Maven Goals :
+							It is used to define the task to be performed 
+								clean 
+								test 
+								package - compile,testing and package creation.
+								install 
+								build 
+								
+						- Maven Repository ::
+							- It is a Global Repository 
+				
+
+
+				Configure Jenkins - Build Server 
+					Install - git, jdk, maven	
+					Valid user_name, Authentication - Key based auth.
+				
+				In Jenkins Master - Add Node Configuration
+
+					
+Java Maven Web Application ==> Project src code in github repo. 
+
+
+#Configure Slave Node1 for Java Maven App. :
+
+sudo -i
+
+apt update -y 
+
+Install Java ::
+
+sudo apt update -y 
+sudo apt install openjdk-11-jre -y
+java -version
+
+Install GIT :
+
+sudo apt install git -y
+
+Install Maven - Build Tool :
+https://maven.apache.org/install.html
+
+sudo apt install maven -y 
+
+
+Create User in Jenkins Slave Machine & Create SSH Keys 
+
+	SSH Keys --> is composed of public and private keys 
+
+
+#Add User : 
+
+
+
+useradd devopsadmin -s /bin/bash -m -d /home/devopsadmin
+
+su - devopsadmin
+
+#ssh-keygen
+
+#for Ubuntu ::
+ssh-keygen -t rsa -b 4096 -m PEM
+
+
+ls ~/.ssh 
+
+#You should see following two files:
+
+#id_rsa - private key
+#id_rsa.pub - public
+
+
+cat id_rsa.pub > authorized_keys
+
+chown -R devopsadmin /home/devopsadmin/.ssh
+chmod 600 /home/devopsadmin/.ssh/authorized_keys
+chmod 700 /home/devopsadmin/.ssh
+
+
+In Jenkins Master - Add Node Configuration
+		
+		Goto Manage Jenkins - Add New Node Configuration
+		
+		
+			Deployment :::
+			
+				Target Server /  Hosted Server
+		Environments 
+		
+			DEV 
+			QA 
+			UAT
+			
+			PROD 
+			
+		In Target Servers :
+		
+			Web Application Server - Tomcat / Nginx 
+			
+			Configure the Target Server / QA Server ::
+			
+				Launch VM 
+				Install jdk, tomcat 
+				Start Tomcat Server - runs in port 8080(default port)
+				Valid user_name, Authentication - Key based auth.
+				
+				In Jenkins Master - install Publish over SSH Plugin. to copy the artifacts from slave1 to target server.
+				
+			Jenkins_Master 
+				Jenkins_Slave_Node1
+			Tomcat_Server
+			
+			
+######################Install TOMCAT Application Server on Ubuntu :::
+
+sudo -i
+
+sudo apt update -y 
+
+
+sudo apt install openjdk-11-jre -y 
+java -version
+
+#edit /etc/profile & add JAVA_HOME
+
+#/usr/lib/jvm/java-11-openjdk-amd64/
+
+vi /etc/profile
+
+java-11-openjdk-amd64
+
+
+export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
+PATH=$PATH:$HOME/bin:$JAVA_HOME/bin
+
+source /etc/profile
+
+Install Tomcat ::  https://tomcat.apache.org/download-80.cgi
+
+https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.96/bin/apache-tomcat-8.5.96.tar.gz
+
+
+cd /opt
+wget https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.96/bin/apache-tomcat-8.5.96.tar.gz
+tar -xvzf /opt/apache-tomcat-8.5.96.tar.gz
+
+mv apache-tomcat-8.5.96 tomcat
+
+#Start Tomcat Server:
+#Goto:
+
+cd /opt/tomcat/bin
+./startup.sh
+
+###########################################
+
+#Add User : 
+
+
+
+useradd devopsadmin -s /bin/bash -m -d /home/devopsadmin
+
+su - devopsadmin
+
+#ssh-keygen
+
+#for Ubuntu ::
+ssh-keygen -t rsa -b 2048 -m PEM
+
+
+ls ~/.ssh 
+
+#You should see following two files:
+
+#id_rsa - private key
+#id_rsa.pub - public
+
+
+cat id_rsa.pub > authorized_keys
+
+chown -R devopsadmin /home/devopsadmin/.ssh
+chmod 600 /home/devopsadmin/.ssh/authorized_keys
+chmod 700 /home/devopsadmin/.ssh
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#make devopsadmin user as a owner to tomcat dir :
+
+chown -R devopsadmin /opt/tomcat
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Deployment ??
+
+	- copying the artifacts from source to target server 
+	
+		jenkins_Slave_Node1												==> 			Tomcat Server 
+		
+			target/mvn-hello-world.war									==>					/opt/tomcat/webapps/mvn-hello-world.war	
+
+
+
+pipeline {
+    agent { label 'slave1' }
+
+    stages {
+        stage('SCM Checkout') {
+            steps {
+                echo 'Perform SCM Checkout'
+				git 'https://github.com/LoksaiETA/Java-mvn-app2.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Perform Maven Build'
+				sh "mvn -Dmaven.test.failure.ignore=true clean package"
+            }
+        }
+        stage('Deploy to QA') {
+            steps {
+				script {
+					sshPublisher(publishers: [sshPublisherDesc(configName: 'Tomcat_Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: 'target/mvn-hello-world.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+				}
+
+            }
+        }
+    }
+}
+
+
+Automate the Builds and Deployments ::::
+
+			Jenkins Build Triggers :::
+			
+				Build Periodic 
+				
+					crontab :::  used to schedule the jobs.  https://crontab.guru/
+				
+				Poll SCM / Github Webhook 
+				
+Next :: 
+
+			Poll SCM / Github Webhook 
+			
+			Email Notifications 
+			
+			Ansible Module 

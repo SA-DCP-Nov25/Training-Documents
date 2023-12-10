@@ -1859,3 +1859,172 @@ Next ::
 			Email Notifications 
 			
 			Ansible Module 
+
+#######################
+Day - 6 10th Dec. 2023 
+#######################
+
+Automate the Builds and Deployments ::::
+
+			Jenkins Build Triggers :::
+			
+				Build Periodic 
+				
+					crontab :::  used to schedule the jobs.  https://crontab.guru/
+				
+				Poll SCM / Github Webhook 
+				
+					- This based on the SCM Changes.
+					- Jenkins Master should have git installed.
+					
+					Poll SCM :
+					
+						This will trigger the jobs based on the crontab only if there is any changes happened in the source code repo.
+
+		DEV --> src --> commit the changed to src_code repo. 
+		
+			Test cycle --> 8AM 	12noon	3PM 
+
+
+					GIThub Webhook :
+					
+						This will trigger the jobs Whenever there is any change happened in the source code repo.
+
+
+						http://13.233.1.53:8080/github-webhook/
+						
+					http://13.127.140.36:8080/github-webhook/
+
+
+					git branch: "${feature1}", url: 'https://github.com/LoksaiETA/Java-mvn-app2.git'
+					git branch: "${feature2}", url: 'https://github.com/LoksaiETA/Java-mvn-app2.git'
+					
+					
+		Email Notifications :::
+			Notifications can be sent during ::: successful / failure / unstable
+			
+			
+			Gmail - 
+					Active account 
+					MFA 
+					App Password 
+						
+						Login to gmail account 
+						go to manage account
+						click on security tab 
+							create MFA 
+							create App Password
+								16 Bytes of token will be generated
+
+							
+			
+Email Notification Plugins :::
+
+SMTP Server :
+smtp.gmail.com
+
+SMTP Authentication
+
+SMTP Port :: 465
+
+Login to Gmail :::
+
+Click Account Settings
+
+select Security 
+
+MFA --> mobile#
+App Password = 16
+What ? window
+Which Appln - email
+
+
+pipeline {
+    agent { label 'slave1' }
+
+    stages {
+        stage('SCM Checkout') {
+            steps {
+                echo 'Perform SCM Checkout'
+				git 'https://github.com/LoksaiETA/Java-mvn-app2.git'
+            }
+              post {
+                failure {
+                  sh "echo 'Send mail on failure'"
+					mail bcc: 'loksaieta223@gmail.com', body: 'The Job Status', cc: 'loksaieta223@gmail.com', from: '', replyTo: '', subject: 'Jenkins Job Status', to: 'loksaieta223@gmail.com,loksaieta223@gmail.com,loksaieta223@gmail.com'
+                }
+              }
+        }
+        stage('Build') {
+            steps {
+                echo 'Perform Maven Build'
+				sh "mvn -Dmaven.test.failure.ignore=true clean package"
+            }
+              post {
+                success {
+                  sh "echo 'Send mail on success'"
+					mail bcc: 'loksaieta223@gmail.com', body: 'The Job Status', cc: 'loksaieta223@gmail.com', from: '', replyTo: '', subject: 'Jenkins Job Status', to: 'loksaieta223@gmail.com,loksaieta223@gmail.com,loksaieta223@gmail.com'
+                }
+                failure {
+                  sh "echo 'Send mail on failure'"
+					mail bcc: 'loksaieta223@gmail.com', body: 'The Job Status', cc: 'loksaieta223@gmail.com', from: '', replyTo: '', subject: 'Jenkins Job Status', to: 'loksaieta223@gmail.com,loksaieta223@gmail.com,loksaieta223@gmail.com'
+                }
+              }	
+        }
+		
+        stage('Deploy to QA') {
+            steps {
+				script {
+					sshPublisher(publishers: [sshPublisherDesc(configName: 'Tomcat_Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: 'target/mvn-hello-world.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+				}
+
+            }
+        }
+    }
+}
+
+		
+pipeline {
+    agent { label 'slave1' }
+
+    stages {
+        stage('SCM Checkout') {
+            steps {
+                echo 'Perform SCM Checkout'
+				git 'https://github.com/LoksaiETA/Java-mvn-app2.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Perform Maven Build'
+				sh "mvn -Dmaven.test.failure.ignore=true clean package"
+            }
+        }
+        stage('Deploy to QA') {
+            steps {
+				script {
+					sshPublisher(publishers: [sshPublisherDesc(configName: 'Tomcat_Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: 'target/mvn-hello-world.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+				}
+
+            }
+        }
+        stage('Deploy to UAT') {
+            steps {
+				script {
+					sshPublisher(publishers: [sshPublisherDesc(configName: 'Tomcat_Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: 'target/mvn-hello-world.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+				}
+
+            }
+        }
+        stage('Deploy to PROD') {
+            steps {
+				script {
+					sshPublisher(publishers: [sshPublisherDesc(configName: 'Tomcat_Server', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: 'target/', sourceFiles: 'target/mvn-hello-world.war')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+				}
+
+            }
+        }
+    }
+}	
+
+

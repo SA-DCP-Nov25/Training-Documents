@@ -2082,3 +2082,73 @@ Configuration Management Tool - Ansible.
 						
 				Ansible Modules :		
 						- are the predefined scripts used to perform some task.
+
+			
+#######################
+Day - 7 16th Dec. 2023 
+#######################
+
+	Next :
+		Ansible Playbooks 
+		Handling Variables
+		Register 
+		Handlers 
+		Ansible Roles 
+		
+		Terraform 
+		
+		Docker & Kubernetes 
+		
+		Prometheus/Grafana
+		
+		Demo on CI/CD Pipeline 
+		
+
+
+		Ansible Playbooks 
+		Handling Variables
+		Register 
+		Handlers 
+		Ansible Roles 
+		
+			Ansible Adhoc --> Just to execute a specific Task / Module 
+			Ansible Playbooks  --> Playbooks are written using yaml script - used to execute the series of ansible tasks/Modules.
+			Playbook should be reusable!
+			
+			
+		Variables :
+		
+			Pre-Defined Variables
+			User-Defined Variables 
+			
+		
+		Tomcat ::
+		
+		Install Tomcat in a node!
+		
+			- Install JDK 
+			- Install Tomcat 
+			- Start Tomcat
+			
+		Handlers :: are used to control the dlow of execution of tasks
+		
+			- Install JDK 
+				notify install tomcat 
+			- Install Tomcat 
+				notify start tomcat 
+			- Start Tomcat	
+
+		Ansible Roles 
+		
+Summary :
+
+		Install & Setup the Ansible Controller and Target Nodes
+		Modules 
+		Inventory files
+		Adhoc Commands 
+		Playbook Variables Handling 
+		Roles 
+			handlers 
+			vars 
+			tasks 
+			

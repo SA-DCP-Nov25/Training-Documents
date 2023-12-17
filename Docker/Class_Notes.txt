@@ -2284,3 +2284,166 @@ Containerization using Docker :::
 		
 		Containerization ::
 			- Is a process of packaging the Applications along with its dependencies.
+
+#######################
+Day - 8 17th Dec. 2023 
+#######################
+
+		How to Install Container Engine ?
+		
+		Working with Containers !
+		
+		Development / Deployment Perspective ::
+		
+		Containerization ::
+			- Is a process of packaging the Applications along with its dependencies.
+			
+			
+			Jenkins pipeline - create artifacts and deploy to target server!
+			
+			Dev Environment
+				- Create src code & commit the changes to Remote Repository.
+					compile - build - test - using Tomcat configured in Eclipse *.war 
+						--> openjdk11,tomcat8.5 payment.war 
+						--> openjdk17,tomcat9   trackorder.war
+						
+			Build Environment 
+				- scm-chkout --> build --> create artifacts --> Promote to target environment
+					*.war -> test using Tomcat 
+						--> openjdk11,tomcat8.5 - mywebapp.war
+			Test Environment 
+				- QA_Testing 
+						--> mywebapp.war => Java8,tomcat8.0
+				- UAT 
+				
+				- Prod 
+				
+				
+			Containerization :
+			
+				Package the application : (payment.war,openjdk11,tomcat8.5)   --> paymentpkg
+			
+			QA 
+				paymentpkg 
+				
+			UAT 
+				paymentpkg
+				
+			Prod
+				paymentpkg
+			
+			
+			
+			Terminologies ::: - Parts of Container Architecture
+			
+				- Container Engine 
+						- Used to create Container Image and run/Manage containers
+				
+				- Container Images
+						- It is a static file composed of application and its' dependencies
+						- It is non-executable
+						
+				- Containers
+						- These are the executable components of Images 
+						- It runs in its' own namespace/addr_space 
+						- It is completely isolated.
+						
+				- Container Registry
+				
+						- It is used to store and manage the container Images 
+						- dockerhub 
+						
+				- Container Repository
+						- It is sub-set of Container Registry
+			
+			
+			
+			Open Source Container Engine :
+			
+				Docker Container Engine 
+				
+					Image 
+					
+			Target : 
+			Managed Services :
+			
+				AWS 
+						ECS,ECR,EKS 
+				Azure 
+						ACS,ACS,AKS
+				GCP 
+						GCS,GCR,GKS
+			
+			
+			Community Edition Container Registry :
+			
+			CE DockerHub 
+				
+			EE DockerHub 
+			
+			
+			
+			Install Docker Engine.		https://docs.docker.com/engine/install/
+			
+				Install Docker in Jenkins Slave Node.
+			
+				sudo apt install docker.io -y
+				
+			Working with Docker Images and Containers ::
+			
+				- docker images - get the list of docker images
+				
+				- Container Images
+						- It is a static file composed of application and its' dependencies in the of layers
+						- It is non-executable				
+				
+				- docker ps 
+				
+				- docker ps -a 
+				
+				- docker pull	used to download the image from docker registry 
+				
+				- docker run 	- used to run the containers based on the image.
+				
+					- docker run <image_Name>
+					
+					Run Container in three different Modes:
+					
+						- Foreground Mode/Attached Mode  # Default
+								
+								docker run centos sleep 20
+						
+						- Background Mode/ Detached Mode
+							
+								docker run -d centos sleep 20
+						
+						- Interactive Mode 
+						
+								docker run -it centos sleep 20
+								
+				
+				- docker start <container_id> 
+				
+				- docker stop <container_id>
+				
+				- docker exec -it <container_id> # used to login to the running container.
+				
+				- docker rm <container_id>
+				
+				- docker rmi <image_name>		# Before deleting the image ensure that, the respective image is not being used in any container.
+				
+				- docker run tomcat:8.0 
+				
+				Port Mapping/Binding 
+				
+					-p <host_port>:<container_port>
+				
+					docker run -it -p 8089:8080 tomcat:8.0
+				
+				
+				
+				
+			
+		
+		
+		

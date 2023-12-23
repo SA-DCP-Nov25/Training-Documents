@@ -1,0 +1,131 @@
+##########################
+Day - 9 | 23rd Dec. 2023
+##########################
+
+		Kubernetes Architecture! 
+			
+			Kubernetes MAster 
+			
+				Kubernetes WorkNodes1
+				Kubernetes WorkNodes2 
+				Kubernetes WorkNodes3
+				
+		Master Node :
+		
+			API Server 
+			Scheduler
+			ETCD 
+			Controller Manager 
+			
+		Nodes :
+		
+			Kubelet
+			Kube Proxy 
+			CRI - ContainerD 
+			
+			
+		Terminologies / Concepts :::
+		
+			Pods
+			Pod Networking 
+			Kubectl				# Command Line Utility
+			Clusters 
+			Controller Objects
+			Services 
+			Volumes 
+			
+		Install & Setup Kubernetes!
+		
+		
+			Using Kubeadm :
+			
+		1. Launch the VMs -- 3VMs ==> 1 + 2
+		2. Enable Inbound Rules - Allow All Traffic
+		3. Setup the Node Names 
+		4. Install Docker 
+		5. Install and Setup CRI - ContainerD
+		6. Install Kubeadm,kubectl,kubeproxy
+		7. Master Node :
+			kubeadm Init 
+		8. Worknodes 
+			kubeadm join 
+		
+		
+
+	dev_server 
+	build 
+	
+	QA 
+	UAT 
+	PROD 
+	
+	Working with POD Object :::
+	
+		- Create Manifest File! written using yaml / json '
+		
+	Deployment :::
+
+	Deployment Controller Object :::
+	
+		To Ensure Hgh availability ::
+			Creating Replicas of Pods 
+			Creating Replicas of Nodes 
+			
+		- Used to ensure high availability of pods by automtically creating replicasets.
+		- Deploy the application services 
+		- Upgrade 
+		- Rollback / Revert 
+		- Scale Up 
+		- Scale Down
+		
+		StrategyType:           RollingUpdate
+		
+		3 pods 		==>			nginx:1.7.9
+		
+	
+	Services :::
+	
+		Cluster IP Service 
+		
+		NodePort Service 
+		
+		Load Balancer Server
+
+			Ingress Rules for routing the requests :::
+			
+				www.gmail.com		- Load Balancer 
+
+			path based routing!
+				www.gmail.com/inbox 		==> path based routing!
+				www.gmail.com/sent 
+				www.gmail.com/trash
+				
+				www.google.com 
+					www.google.com/maps
+					www.google.com/translate 
+					
+			Host Based Routing 
+				
+				www.google.com
+				www.mail.google.com
+				www.translate.google.com 
+		
+	Volumes :::
+	
+		Persistant Data ::
+		
+			emptydir 
+			hostpath
+			persistant Volume 
+			persistant Volume Claim
+			
+			
+	Namespace :::
+			It is logical partition of Cluster.
+			
+Next ::
+
+		Continuous Monitoring!
+				Prometheus & Grafana
+		
+		CICD Demo!

@@ -1,0 +1,250 @@
+##########################
+Day - 10 | 24th Dec. 2023
+##########################
+
+	Contiuous Monitoring! 
+	
+		Production Support Team
+		Production Monitoring Team 
+		
+		Monitoring ::
+		
+			Infra-Structure Monitoring :
+					CPU Utilization/Memory Utilization/Traffic 
+						- Prometheus / Grafana / Dynatrace / DataDog / Nagios
+			
+			Application Monitoring :
+					AppDynamics 
+					
+					Application :
+					
+						Prgms1,2,3,4
+		Architecture of Monitoring Tool ::
+		
+			Prometheus 
+			
+			Client Server Architecture ::
+			
+		Install Prometheus & Grafana and monitor
+			
+			
+			Prometheus uses PromQL -- used to query the details from the Time series Databases maintained in the prometheus server.
+						
+			
+	CICD Demo!
+
+		
+		DevOps CICD  Process Workflow ::
+		
+		Infra-Structure :
+		
+			Environments :
+			
+				Dev
+				
+				Build
+				
+				Testing (QA/UAT)
+				
+				Prod
+			
+			Tools :
+			
+			Scope for Automation :::
+			
+		Roles ??
+		
+			DevOps Associate / Sr. DA 
+			DevOps Engg.	/ Sr. DE 
+			DevOps Lead		/ Sr. DL 
+			DevOps Architect	/ Sr. DA 
+			DevOps Consultant / Sr. DC 
+			SRE 
+			
+			
+		1. Assessment !
+		
+		2. Assessment Report to client !
+		
+		3. Recommendation !
+		
+			Tools ::
+			
+				Open-Source 
+				
+				Managed Services 
+					AWS / Az DS
+					
+		4. CICD Pipeline :::
+		
+			Tools ::
+			
+
+				
+				
+				
+		Java Web Application :::
+		
+		Dev --> In Dev Envrionment, Developers will create the source code, test & commit the changes in Remote GIT Repository.
+		
+		DevOps Process :
+		
+		CICD Pipeline ::
+		
+		What are Stages?
+		
+			SCM_Checkout					# Download the latest code from remote repo to build server 
+			Application Build				# Automate the Code Compilation, Create Artifacts, Unit Testing 
+			Docker Build					# Automate the Docker Application Image creation
+			Publish to Docker Hub			# Publish to DockerHub
+			Deploy to Kubernetes Cluster	# Deploy the docker Application images to Kubernetes Cluster
+			
+		Infra-Structure ::
+			
+			How many servers we need ??					5
+			
+			What are the tools we need to install ??
+
+
+			Jenkins_Master(VM)						# Create Jenkins Projects/Jobs & Schedule the Jenkins Jobs.
+															Tools : GIT, JDK, Jenkins 
+			
+				Jenkins_Slave(VM) - Build Server 	# Application Build : SCM Checkout, Build, Unit Testing, Create Artifacts
+													# Build Docker Images based on the artifacts.
+													# Publish the Image to DockerHub
+															Tools : GIT, JDK, MAVEN, Docker 
+															
+			Kubernetes_Master(VM)					# Deploy the Application Images.
+				Kubernetes_WorkerNode1(VM)
+				Kubernetes_WorkerNode2(VM)
+				
+		How Create CICD Pipeline by integrating all these tools :::?
+
+
+
+pipeline {
+
+    agent { label 'slave1' }
+	
+    tools {
+        maven "maven-3.6.3"
+    }
+
+	environment {	
+		DOCKERHUB_CREDENTIALS=credentials('dockerloginid')
+	}
+	
+    stages {
+        stage('SCM_Checkout') {
+            steps {
+                echo 'Perform SCM Checkout'
+				git 'https://github.com/LoksaiETA/devops-java-webapp.git'
+            }
+        }
+        stage('Application_Build') {
+            steps {
+                echo 'Perform Maven Build'
+				sh 'mvn -Dmaven.test.failure.ignore=true clean package'
+            }
+		  post {
+			failure {
+			  sh "echo 'Send mail on Failure"
+			  mail to:"loksaieta223@gmail.com", from: 'loksaieta223@gmail.com', subject:"Build Failed: ${currentBuild.fullDisplayName}", body: "Build Failed"
+			}
+		  }
+        }
+        stage('Build Docker Image') {
+            steps {
+				sh 'docker version'
+				sh "docker build -t loksaieta/loksai-eta-app:${BUILD_NUMBER} ."
+				sh 'docker image list'
+				sh "docker tag loksaieta/loksai-eta-app:${BUILD_NUMBER} loksaieta/loksai-eta-app:latest"
+            }
+        }
+
+        stage('Approve - Publish_to_Docker_Registry'){
+            steps{
+                
+                //----------------send an approval prompt-------------
+                script {
+                   env.APPROVED_DEPLOY = input message: 'User input required Choose "Yes" | "Abort"'
+                       }
+                //-----------------end approval prompt------------
+            }
+        }        
+
+
+		stage('Login2DockerHub') {
+
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
+		stage('Publish_to_Docker_Registry') {
+			steps {
+				sh "docker push loksaieta/loksai-eta-app:latest"
+			}
+		}
+
+        stage('Approve - Deployment'){
+            steps{
+                
+                //----------------send an approval prompt-------------
+                script {
+                   env.APPROVED_DEPLOY = input message: 'User input required Choose "Yes" | "Abort"'
+                       }
+                //-----------------end approval prompt------------
+            }
+        }        
+
+
+		stage('Deploy to Kubernetes') {
+            steps {
+				script {
+				sshPublisher(publishers: [sshPublisherDesc(configName: 'Kubernetes', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'kubectl apply -f k8smvndeployment.yaml', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '*.yaml')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+			}	
+            }
+			  post {
+				success {
+				  sh "echo 'Send mail on success'"
+				  mail to:"loksaieta223@gmail.com", from: 'loksaieta223@gmail.com', subject:"Deployment SUCCESS: ${currentBuild.fullDisplayName}", body: "Deployed to Kubernetes. "
+				}
+				failure {
+				  sh "echo 'Send mail on Failure"
+				  mail to:"loksaieta223@gmail.com", from: 'loksaieta223@gmail.com', subject:"Deployment Failed: ${currentBuild.fullDisplayName}", body: "Deployed to Kubernetes. "
+				}
+			  }
+		}
+    }
+}
+
+
+Email :: success | failure | unstable 
+
+
+useradd devopsadmin -s /bin/bash -m -d /home/devopsadmin
+
+#useradd devopsadmin
+
+su - devopsadmin	
+
+ssh-keygen -t rsa -b 1024 -m PEM
+
+cat id_rsa.pub > authorized_keys
+
+chown -R devopsadmin /home/devopsadmin/.ssh
+chmod 600 /home/devopsadmin/.ssh/authorized_keys
+chmod 700 /home/devopsadmin/.ssh
+
+$ visudo
+
+#add the below mentioned line in the file and save it.
+ 
+devopsadmin ALL=(ALL) NOPASSWD: ALL
+
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+
+usermod -aG docker devopsadmin			# This should be executed in Slave Node and Kubernetes Master Node
